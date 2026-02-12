@@ -1,0 +1,20 @@
+name: Deploy to Azure Blob Storage
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Upload to Blob Storage
+      uses: azure/CLI@v1
+      with:
+        inlineScript: |
+            az storage blob upload-batch --account-name nbapredictoralbeza --auth-mode key -d '$web' -s . --connection-string "$AZURE_CONNECTION_STRING"
+      env:
+        AZURE_CONNECTION_STRING: ${{ secrets.AZURE_STORAGE_CONNECTION_STRING }}
