@@ -1,0 +1,10 @@
+[
+    { "team": "Phoenix Suns", "probability": "98%", "status": "Lock" },
+    { "team": "Memphis Grizzlies", "probability": "94%", "status": "Lock" },
+    { "team": "Golden State Warriors", "probability": "89%", "status": "Likely" },
+    { "team": "Miami Heat", "probability": "85%", "status": "Likely" },
+    { "team": "Boston Celtics", "probability": "82%", "status": "Contender" },
+    { "team": "Dallas Mavericks", "probability": "78%", "status": "Contender" },
+    { "team": "LA Lakers", "probability": "12%", "status": "Lottery" },
+    { "team": "Houston Rockets", "probability": "1%", "status": "Rebuild" }
+]

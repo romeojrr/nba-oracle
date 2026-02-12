@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NBA Postseason Oracle</title>
+    <style>
+        body { font-family: 'Arial', sans-serif; background-color: #f0f0f0; margin: 0; padding: 20px; }
+        .container { max-width: 800px; margin: 0 auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        h1 { color: #1d428a; text-align: center; }
+        .model-info { text-align: center; color: #666; font-style: italic; margin-bottom: 20px; }
+        .team-card { display: flex; justify-content: space-between; padding: 15px; border-bottom: 1px solid #eee; align-items: center; }
+        .team-name { font-weight: bold; font-size: 1.2em; }
+        .probability { font-weight: bold; color: #c8102e; }
+        .status-badge { padding: 5px 10px; border-radius: 15px; font-size: 0.8em; color: white; }
+        .Lock { background-color: #28a745; }
+        .Likely { background-color: #17a2b8; }
+        .Contender { background-color: #ffc107; color: black; }
+        .Bubble { background-color: #fd7e14; }
+        .Lottery { background-color: #6c757d; }
+        .Rebuild { background-color: #343a40; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>🏀 The NBA Oracle</h1>
+    <div class="model-info">Powered by Azure AutoML (Algorithm: KNN)</div>
+    <div id="predictions-list">
+        Loading AI predictions...
+    </div>
+</div>
+
+<script>
+    fetch('predictions.json')
+        .then(response => response.json())
+        .then(data => {
+            const list = document.getElementById('predictions-list');
+            list.innerHTML = ''; 
+
+            data.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'team-card';
+                card.innerHTML = `
+                    <div class="team-name">${item.team}</div>
+                    <div>
+                        <span class="probability">${item.probability}</span>
+                        <span class="status-badge ${item.status}">${item.status}</span>
+                    </div>
+                `;
+                list.appendChild(card);
+            });
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            document.getElementById('predictions-list').innerHTML = 'Error loading data.';
+        });
+</script>
+
+</body>
+</html>
